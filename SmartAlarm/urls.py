@@ -19,6 +19,7 @@ from django.contrib import admin
 from api import views
 
 urlpatterns = [
+	url(r'^$', view),
     url(r'^admin/', admin.site.urls),
     url(r'^api/getResponse/', views.getResponse, name='getResponse'),
 ]
