@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import speech_recognition as sr
+#import speech_recognition as sr
 import io
 import os
 from django.shortcuts import render
