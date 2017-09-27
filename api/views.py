@@ -19,7 +19,7 @@ def getResponse(request):
         username = request.POST.get('username')
         response = {}
 
-        response['value'] = 'hi'#convertAudioFileToText("test.FLAC")
+        response['value'] = "Sup vj";
 
         return JsonResponse(response, safe=False)
 
