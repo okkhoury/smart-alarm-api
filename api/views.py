@@ -6,9 +6,9 @@ import os
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
-from google.cloud import speech
-from google.cloud.speech import enums
-from google.cloud.speech import types
+# from google.cloud import speech
+# from google.cloud.speech import enums
+# from google.cloud.speech import types
 
 # Create your views here.
 
