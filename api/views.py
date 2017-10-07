@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/owenkhoury/Desktop/SmartAlarm-ca9757e1814f.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/owenkhoury/Desktop/SmartAlarm-ca9757e1814f.json"
 
 @csrf_exempt
 def getResponse(request):

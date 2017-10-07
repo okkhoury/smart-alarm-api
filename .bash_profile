@@ -1,0 +1,1 @@
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/owenkhoury/Desktop/SmartAlarm-ca9757e1814f.json
