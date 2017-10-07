@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-#import speech_recognition as sr
+
 import io
 import os
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
+
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
+
+from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -16,17 +18,17 @@ from google.cloud.speech import types
 def getResponse(request):
     # if post request came
     if request.method == 'POST':
-        username = request.POST.get('username')
+        filename = request.POST.get('filename')
         response = {}
 
-        response['value'] = convertAudioFileToText("test.flac");
+        response['textFromFile'] = convertAudioFileToText("test.flac");
 
         return JsonResponse(response, safe=False)
 
 
 def convertAudioFileToText(filename):
 	# Instantiates a client
-	client = speech.speechClient();
+	client = speech.SpeechClient();
 
 	# The name of the audio file to transcribe
 	file_name = os.path.join(
