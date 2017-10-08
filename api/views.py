@@ -8,6 +8,10 @@ from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
 
+from googleapiclient.discovery import build
+from oauth2client.client import GoogleCredentials
+
+
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
@@ -19,12 +23,21 @@ def index(request):
 @csrf_exempt
 def getResponse(request):
     # if post request came
+	
+	credentials = GoogleCredentials.get_application_default()
+	service = build('compute', 'v1', credentials=credentials)
+
+	PROJECT = 'ardent-pact-149801'
+	ZONE = 'us-east1-a'
+	request = service.instances().list(project=PROJECT, zone=ZONE)
+	response = request.execute()
+		
     if request.method == 'POST':
         filename = request.POST.get('filename')
         response = {}
 
         response['textFromFile'] = convertAudioFileToText("test.flac");
-
+		
         return JsonResponse(response, safe=False)
 
 
