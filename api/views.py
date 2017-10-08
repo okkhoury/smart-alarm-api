@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
-	return render_to_response('googlef0490e45c8742bb2.html')
+	return render_to_response('api/googlef0490e45c8742bb2.html')
 
 @csrf_exempt
 def getResponse(request):
