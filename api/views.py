@@ -32,13 +32,12 @@ def getResponse(request):
 	request = service.instances().list(project=PROJECT, zone=ZONE)
 	response = request.execute()
 		
-    if request.method == 'POST':
-        filename = request.POST.get('filename')
-        response = {}
-
-        response['textFromFile'] = convertAudioFileToText("test.flac");
+	if request.method == 'POST':
+		filename = request.POST.get('filename')
+		response = {}
+		response['textFromFile'] = convertAudioFileToText("test.flac");
 		
-        return JsonResponse(response, safe=False)
+	return JsonResponse(response, safe=False)
 
 
 def convertAudioFileToText(filename):
