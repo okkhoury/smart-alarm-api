@@ -8,11 +8,13 @@ from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+def index(request):
+	return render_to_response('googlef0490e45c8742bb2.html')
 
 @csrf_exempt
 def getResponse(request):
