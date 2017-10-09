@@ -37,7 +37,7 @@ def getResponse(request):
 		response = {}
 		response['textFromFile'] = convertAudioFileToText("test.flac");
 		
-	return JsonResponse(response, safe=False)
+		return JsonResponse(response, safe=False)
 
 
 def convertAudioFileToText(filename):
