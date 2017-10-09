@@ -24,13 +24,13 @@ def index(request):
 def getResponse(request):
     # if post request came
 	
-	credentials = GoogleCredentials.get_application_default()
-	service = build('compute', 'v1', credentials=credentials)
+	#credentials = GoogleCredentials.get_application_default()
+	#service = build('compute', 'v1', credentials=credentials)
 
-	PROJECT = 'ardent-pact-149801'
-	ZONE = 'us-east1-a'
-	request = service.instances().list(project=PROJECT, zone=ZONE)
-	response = request.execute()
+	# PROJECT = 'ardent-pact-149801'
+	# ZONE = 'us-east1-a'
+	# request = service.instances().list(project=PROJECT, zone=ZONE)
+	# response = request.execute()
 		
 	if request.method == 'POST':
 		filename = request.POST.get('filename')
