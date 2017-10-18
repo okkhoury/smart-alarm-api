@@ -15,7 +15,11 @@ from oauth2client.client import GoogleCredentials
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
+
+
 from django.core.files.storage import FileSystemStorage
+
+from .forms import DocumentForm
 
 # Create your views here.
 def index(request):
@@ -35,15 +39,26 @@ def getResponse(request):
 		
 	if request.method == 'POST':
 
-		#form = ModelFormWithFileField(request.POST, request.FILES)
+		form = DocumentForm(request.POST, request.FILES)
 
-		file = request.files("test.flac")
-		fs = FileSystemStorage()
-		filename = fs.save(myfile.name, myfile)
+		if form.is_valid():
 
-		response['textFromFile'] = filename # convertAudioFileToText("test.flac");
+			form.save()
+
+			response['textFromFile'] = "hello" # convertAudioFileToText("test.flac");
 		
-		return JsonResponse(response, safe=False)
+			return JsonResponse(response, safe=False)
+            
+
+		# #form = ModelFormWithFileField(request.POST, request.FILES)
+
+		# file = request.files("test.flac")
+		# fs = FileSystemStorage()
+		# filename = fs.save(file.name, file)
+
+		# response['textFromFile'] = filename # convertAudioFileToText("test.flac");
+		
+		# return JsonResponse(response, safe=False)
 
 		# if form.is_valid():
   #           # file is saved
