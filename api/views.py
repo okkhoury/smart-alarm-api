@@ -41,12 +41,18 @@ def getResponse(request):
 
 		form = DocumentForm(request.POST, request.FILES)
 
+		response = {}
+
 		if form.is_valid():
 
 			form.save()
 
 			response['textFromFile'] = "hello" # convertAudioFileToText("test.flac");
 		
+			return JsonResponse(response, safe=False)
+
+		else:
+			response['textFromFile'] = "failed"
 			return JsonResponse(response, safe=False)
             
 
