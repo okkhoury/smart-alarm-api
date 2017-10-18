@@ -25,6 +25,12 @@ from .forms import DocumentForm
 def index(request):
 	return render_to_response('googlef0490e45c8742bb2.html')
 
+
+def handle_uploaded_file(f):
+    with open('/Users/owenkhoury/Dev/capstone/SmartAlarm/api/saved.flac', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
 @csrf_exempt
 def getResponse(request):
     # if post request came
@@ -45,38 +51,18 @@ def getResponse(request):
 
 		if form.is_valid():
 
-			form.save()
+			file = request.FILES['file']
 
-			response['textFromFile'] = "hello" # convertAudioFileToText("test.flac");
+			handle_uploaded_file(file)
+
+			response['textFromFile'] = convertAudioFileToText("saved.flac");
 		
 			return JsonResponse(response, safe=False)
 
 		else:
 			response['textFromFile'] = "failed"
 			return JsonResponse(response, safe=False)
-            
-
-		# #form = ModelFormWithFileField(request.POST, request.FILES)
-
-		# file = request.files("test.flac")
-		# fs = FileSystemStorage()
-		# filename = fs.save(file.name, file)
-
-		# response['textFromFile'] = filename # convertAudioFileToText("test.flac");
-		
-		# return JsonResponse(response, safe=False)
-
-		# if form.is_valid():
-  #           # file is saved
-		# 	form.save()
-		# 	return HttpResponseRedirect('/success/url/')
-
-		# filename = request.POST.get('filename')
-		# response = {}
-		# response['textFromFile'] = "test hello" # convertAudioFileToText("test.flac");
-		
-		#return JsonResponse(response, safe=False)
-
+			
 
 def convertAudioFileToText(filename):
 	# Instantiates a client
