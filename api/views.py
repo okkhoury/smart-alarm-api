@@ -35,7 +35,7 @@ def getResponse(request):
 	if request.method == 'POST':
 		filename = request.POST.get('filename')
 		response = {}
-		response['textFromFile'] = convertAudioFileToText("test.flac");
+		response['textFromFile'] = "test hello" # convertAudioFileToText("test.flac");
 		
 		return JsonResponse(response, safe=False)
 
