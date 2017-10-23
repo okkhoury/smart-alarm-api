@@ -27,7 +27,7 @@ def index(request):
 
 
 def handle_uploaded_file(f):
-    with open('/Users/owenkhoury/Dev/capstone/SmartAlarm/api/saved.flac', 'wb+') as destination:
+    with open('saved.flac', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
