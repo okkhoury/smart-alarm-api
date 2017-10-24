@@ -28,6 +28,18 @@ from django.views.decorators.csrf import csrf_exempt
 myUsername = '6d1d6655-b091-4232-bb3c-72f35b924f63'
 myPassword = 'PiNCxqb5uTbe'
 
+onWords = ["on", "set", "make", "create"]
+offWords = ["off", "stop", "shut"]
+snoozeWords = ["snooze"]
+
+units = [
+        "oh", "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen", "twenty"
+      ]
+
+tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty"]
+
 speech_to_text = SpeechToTextV1(username=myUsername, password = myPassword, x_watson_learning_opt_out=False)
 
 def handle_uploaded_file(f):
@@ -53,19 +65,73 @@ def getResponse(request):
 			with open("saved.flac", 'rb') as audio_file:
 				fileData = json.dumps(speech_to_text.recognize(audio_file, content_type='audio/flac', timestamps=True, word_confidence=True))
 			
-			data = re.sub(r'([^\s\w]|_)+', '', fileData.split("transcript")[1].split("timestamps")[0]).strip()
+			data = re.sub(r'([^\s\w]|_)+', '', fileData.split("transcript")[1].split("timestamps")[0]).strip().lower()
 
 			for word in data.split(" "):
-				if word == "Tony":
-					response['transcript'] = "tony was here"
+
+				if word in onWords:
+					response['command'] = "on"
+					response['time'] = getTimeFromWords(data.split(" "))
+					return JsonResponse(response, safe=False)
+
+				elif word in offWords:
+					response['command'] = "off"
+					return JsonResponse(response, safe=False)
+
+				elif word in snoozeWords:
+					response['command'] = "snooze"
 					return JsonResponse(response, safe=False)
 
 
-			response['transcript'] = data
+			response['command'] = "retry"
 		
 			return JsonResponse(response, safe=False)
 
 		else:
 			response['textFromFile'] = "failed"
 			return JsonResponse(response, safe=False)
+
+
+
+def getTimeFromWords(data):
+
+	time = 0;
+	mag = 1;
+
+	hour = ""
+	minutes = ""
+	timeOfDay = "am"
+
+	hourFound = False
+
+	for word in data:
+		if word == "pm":
+				timeOfDay = "pm"
+
+		if word in units:
+			if hourFound == False:
+				hour = str(units.index(word))
+				hourFound = True 
+			else:
+				minutes += str(units.index(word))
+
+	if minutes == "":
+		minutes = "00"
+
+	return hour + ":" + minutes + " " + timeOfDay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			
