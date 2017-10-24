@@ -21,5 +21,4 @@ from api import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/getResponse/', views.getResponse, name='getResponse'),
-	url(r'^api/googlef0490e45c8742bb2.html/', views.index, name='index'),
 ]
