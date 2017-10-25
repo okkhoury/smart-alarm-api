@@ -83,7 +83,7 @@ def getResponse(request):
 					return JsonResponse(response, safe=False)
 
 
-			response['command'] = "retry"
+			response['command'] = data
 		
 			return JsonResponse(response, safe=False)
 
@@ -99,7 +99,7 @@ def getTimeFromWords(data):
 	mag = 1;
 
 	hour = ""
-	minutes = ""
+	minutes = 0
 	timeOfDay = "am"
 
 	hourFound = False
@@ -113,20 +113,12 @@ def getTimeFromWords(data):
 				hour = str(units.index(word))
 				hourFound = True 
 			else:
-				minutes += str(units.index(word))
+				minutes += units.index(word)
 
-	if minutes == "":
-		minutes = "00"
+	if minutes < 10:
+		minutes = "0" + str(minutes);
 
-	return hour + ":" + minutes + " " + timeOfDay
-
-
-
-
-
-
-
-
+	return hour + ":" + str(minutes) + " " + timeOfDay
 
 
 
