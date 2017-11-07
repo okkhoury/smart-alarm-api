@@ -43,7 +43,7 @@ tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty"]
 speech_to_text = SpeechToTextV1(username=myUsername, password = myPassword, x_watson_learning_opt_out=False)
 
 def handle_uploaded_file(f):
-    with open('saved.flac', 'wb+') as destination:
+    with open('saved.wav', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
@@ -56,14 +56,18 @@ def getResponse(request):
 
 		response = {}
 
+		print("outside")
+
 		if form.is_valid():
+
+			print("here")
 
 			file = request.FILES['file']
 
 			handle_uploaded_file(file)
 
-			with open("saved.flac", 'rb') as audio_file:
-				fileData = json.dumps(speech_to_text.recognize(audio_file, content_type='audio/flac', timestamps=True, word_confidence=True))
+			with open("saved.wav", 'rb') as audio_file:
+				fileData = json.dumps(speech_to_text.recognize(audio_file, content_type='audio/wav', timestamps=True, word_confidence=True))
 			
 			data = re.sub(r'([^\s\w]|_)+', '', fileData.split("transcript")[1].split("timestamps")[0]).strip().lower()
 
