@@ -25,8 +25,8 @@ from .forms import DocumentForm
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-myUsername = '6d1d6655-b091-4232-bb3c-72f35b924f63'
-myPassword = 'PiNCxqb5uTbe'
+myUsername = '7558b471-8543-4ac4-861f-fee723bc59ba'
+myPassword = '1h2YhFU1HpW2'
 
 onWords = ["on", "set", "make", "create"]
 offWords = ["off", "stop", "shut"]
