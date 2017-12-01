@@ -7,15 +7,34 @@ body {
 }
 </style>
 
-<h1><font size="12"><center>Smart Alarm</center></font><br/></h1>
+<div style="width: 100%;">
+   <div style="float:left; width: 80%">
+      <h1><font size="12"><center>Smart Alarm</center></font><br/></h1>
 
-<b></b>
+      <b></b>
 
-<h1><center>{{ AlarmOnOffVisual }}</center></h1>
+      <h1><center>{{ AlarmOnOffVisual }}</center></h1>
 
-<h1><center>Alarm set for: {{ AlarmTimeVisual }}</center></h1>
+      <h1><center>Alarm set for: {{ AlarmTimeVisual }}</center></h1>
 
-<h1><center>Snooze: {{ SnoozeVisual }}</center></h1>
+      <h1><center>Snooze: {{ SnoozeVisual }}</center></h1>
+   </div>
+   <div style="float:right; width: 20%">
+        <!-- <h1><center>History: </center></h1> -->
+
+        <h2><font size="6"><center>History</center></font><br/></h2>
+
+        <b></b>
+
+        {% for command in commandHistory %}
+            <div>
+                <p><center>{{ command }}</center></p>
+            <br><br/>
+            </div>
+        {% endfor %}
+   </div>
+</div>
+<div style="clear:both"></div>
 
 
 </html>

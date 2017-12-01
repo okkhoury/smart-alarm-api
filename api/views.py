@@ -42,10 +42,14 @@ SnoozeVisual = "OFF"
 global AlarmOnOffVisual
 AlarmOnOffVisual = "NO ALARM SET"
 
+
+### Variables for the logic ###
+
+global commandHistory
+commandHistory = []
+
 myUsername = '7558b471-8543-4ac4-861f-fee723bc59ba'
 myPassword = '1h2YhFU1HpW2'
-
-
 
 # Key words that trigger either on, off, or snooze commands.
 onWords = ["on", "set", "make", "create"]
@@ -98,6 +102,8 @@ def getResponse(request):
 
 			for word in data.split(" "):
 
+				global commandHistory
+
 				if word in onWords:
 					response['command'] = "on"
 
@@ -116,6 +122,7 @@ def getResponse(request):
 					global SnoozeVisual
 					SnoozeVisual = "OFF"
 
+					commandHistory.append(data);
 					return JsonResponse(response, safe=False)
 
 				elif word in offWords:
@@ -133,7 +140,7 @@ def getResponse(request):
 					global SnoozeVisual
 					SnoozeVisual = "OFF"
 
-
+					commandHistory.append(data);
 					return JsonResponse(response, safe=False)
 
 				elif word in snoozeWords:
@@ -143,10 +150,12 @@ def getResponse(request):
 					global SnoozeVisual
 					SnoozeVisual = "ON"
 					
+					commandHistory.append(data);
 					return JsonResponse(response, safe=False)
 
+			commandHistory.append(data);
+
 			response['command'] = data
-		
 			return JsonResponse(response, safe=False)
 
 		else:
@@ -158,11 +167,12 @@ def getResponse(request):
 def showHomePage(request):	
 	global AlarmTimeVisual
 	print(AlarmTimeVisual)
-	return render(request, 'home.html', {'AlarmTimeVisual': AlarmTimeVisual, 'AlarmOnOffVisual': AlarmOnOffVisual, 'SnoozeVisual': SnoozeVisual})
+	global commandHistory
+	return render(request, 'home.html', {'AlarmTimeVisual': AlarmTimeVisual, 
+		'AlarmOnOffVisual': AlarmOnOffVisual, 'SnoozeVisual': SnoozeVisual, 'commandHistory': commandHistory})
 
 
 def getTimeFromWords(data):
-
 	time = 0;
 	mag = 1;
 
