@@ -1,40 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<style>
-body {
-    background-color: #f7f7f7; 
-}
+<head>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<style type="text/css">
+    .jumbotron {
+    background-color:transparent; !important; 
+    }   
 </style>
 
 <div style="width: 100%;">
-   <div style="float:left; width: 80%">
-      <h1><font size="12"><center>Smart Alarm</center></font><br/></h1>
+  <div class="row">
+    <div class="col-md-8"><center>
+        
+        <div class="jumbotron">
 
-      <b></b>
+          <h1>Smart Alarm!</h1>
+        </div>
 
-      <h1><center>{{ AlarmOnOffVisual }}</center></h1>
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
-      <h1><center>Alarm set for: {{ AlarmTimeVisual }}</center></h1>
+        </br></br>
 
-      <h1><center>Snooze: {{ SnoozeVisual }}</center></h1>
-   </div>
-   <div style="float:right; width: 20%">
-        <!-- <h1><center>History: </center></h1> -->
+        <h3><font size="6">{{AlarmOnOffVisual|title}}</font></h3>
 
-        <h2><font size="6"><center>History</center></font><br/></h2>
+        </br></br>
 
-        <b></b>
+        <h3><font size="6">Alarm set for: {{ AlarmTimeVisual}}</font></h3>
 
+        </br></br>
+
+        <h3><font size="6">Snooze: {{ SnoozeVisual }}</font></h3>
+
+    </center></div>
+
+    <div class="col-md-4"><center>
+       <!--  <center><h1>History</h1></center> -->
+
+        <div class="jumbotron">
+          <h1>History</h1>
+        </div>
+
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+
+        <div class="jumbotron">
         {% for command in commandHistory %}
             <div>
                 <p><center>{{ command }}</center></p>
             <br><br/>
             </div>
         {% endfor %}
-   </div>
-</div>
-<div style="clear:both"></div>
+        </div>
+    </center></div>
+  </div>
+
+
+
+</body>
 
 
 </html>

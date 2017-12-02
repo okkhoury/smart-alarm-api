@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
  # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -54,7 +53,7 @@ myPassword = '1h2YhFU1HpW2'
 # Key words that trigger either on, off, or snooze commands.
 onWords = ["on", "set", "make", "create"]
 offWords = ["off", "stop", "shut"]
-snoozeWords = ["snooze"]
+snoozeWords = ["snooze", "news"]
 
 # Used to parse the user text and format numbers. Ex thirty five -> 35.
 units = [
@@ -100,9 +99,13 @@ def getResponse(request):
 			
 			data = re.sub(r'([^\s\w]|_)+', '', fileData.split("transcript")[1].split("timestamps")[0]).strip().lower()
 
-			for word in data.split(" "):
+			global commandHistory
 
-				global commandHistory
+			# Only keep track of the last 10 commands given.
+			if len(commandHistory) > 6:
+				commandHistory.pop(0)
+
+			for word in data.split(" "):
 
 				if word in onWords:
 					response['command'] = "on"
