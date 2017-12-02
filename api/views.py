@@ -30,21 +30,21 @@ from django.views.decorators.csrf import csrf_exempt
 ### Variables for the alarm visual ####
 
 # Display the time for which an alarm is set.
-global AlarmOnOffVisual
+#global AlarmOnOffVisual
 AlarmTimeVisual = 0;
 
 # Display if a snooze is currently set.
-global SnoozeVisual
+#global SnoozeVisual
 SnoozeVisual = "OFF"
 
 # Display whether there is currently an alarm set.
-global AlarmOnOffVisual
+#global AlarmOnOffVisual
 AlarmOnOffVisual = "NO ALARM SET"
 
 
 ### Variables for the logic ###
 
-global commandHistory
+#global commandHistory
 commandHistory = []
 
 myUsername = '7558b471-8543-4ac4-861f-fee723bc59ba'
@@ -77,6 +77,11 @@ def handle_uploaded_file(f):
 # sends the user's command back to the MyRio in the post request response.
 @csrf_exempt
 def getResponse(request):
+
+	global AlarmOnOffVisual
+	global SnoozeVisual
+	global AlarmTimeVisual
+	global commandHistory
 		
 	if request.method == 'POST':
 
@@ -98,8 +103,6 @@ def getResponse(request):
 				fileData = json.dumps(speech_to_text.recognize(audio_file, content_type='audio/wav', timestamps=True, word_confidence=True))
 			
 			data = re.sub(r'([^\s\w]|_)+', '', fileData.split("transcript")[1].split("timestamps")[0]).strip().lower()
-
-			global commandHistory
 
 			# Only keep track of the last 10 commands given.
 			if len(commandHistory) > 6:
@@ -168,9 +171,6 @@ def getResponse(request):
 
 @csrf_exempt
 def showHomePage(request):	
-	global AlarmTimeVisual
-	print(AlarmTimeVisual)
-	global commandHistory
 	return render(request, 'home.html', {'AlarmTimeVisual': AlarmTimeVisual, 
 		'AlarmOnOffVisual': AlarmOnOffVisual, 'SnoozeVisual': SnoozeVisual, 'commandHistory': commandHistory})
 
