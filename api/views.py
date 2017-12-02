@@ -114,15 +114,15 @@ def getResponse(request):
 					response['time'] = time 
 
 					# Update the visual to indicate that an alarm is on
-					global AlarmOnOffVisual
+					#global AlarmOnOffVisual
 					AlarmOnOffVisual = "ALARM SET"
 
 					# update visual with new alarm time
-					global AlarmTimeVisual
+					#global AlarmTimeVisual
 					AlarmTimeVisual = time
 
 					# Turn snooze off if it was on
-					global SnoozeVisual
+					#global SnoozeVisual
 					SnoozeVisual = "OFF"
 
 					commandHistory.append(data);
@@ -132,15 +132,15 @@ def getResponse(request):
 					response['command'] = "off"
 
 					# Update the visual to indicate that an alarm is on
-					global AlarmOnOffVisual
+					#global AlarmOnOffVisual
 					AlarmOnOffVisual = "NO ALARM SET"
 
 					# update visual with new alarm time
-					global AlarmTimeVisual
+					#global AlarmTimeVisual
 					AlarmTimeVisual = None
 
 					# Turn snooze off if it was on
-					global SnoozeVisual
+					#global SnoozeVisual
 					SnoozeVisual = "OFF"
 
 					commandHistory.append(data);
@@ -150,7 +150,7 @@ def getResponse(request):
 					response['command'] = "snooze"
 
 					# Turn snooze off if it was on
-					global SnoozeVisual
+					#global SnoozeVisual
 					SnoozeVisual = "ON"
 					
 					commandHistory.append(data);
