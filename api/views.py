@@ -108,14 +108,12 @@ def getResponse(request):
 			if len(commandHistory) > 6:
 				commandHistory.pop(0)
 
-			for word in data.split(" "):
+			for word in data.split("confidence")[0].split(" "):
 
 				if word in onWords:
 					response['command'] = "on"
 
-					wordlist = list("Word to Split")
-
-					time = getTimeFromWords(wordlist[0].split(" "))
+					time = getTimeFromWords(data.split("confidence")[0].split(" "))
 					response['time'] = time 
 
 					# Update the visual to indicate that an alarm is on
@@ -178,6 +176,10 @@ def showHomePage(request):
 
 def getTimeFromWords(data):
 
+	for word in data:
+		word.replace("'", "")
+		word.replace('u', "")
+
 	time = 0;
 	mag = 1;
 
@@ -189,7 +191,7 @@ def getTimeFromWords(data):
 
 	for word in data:
 		if word == "pm":
-				timeOfDay = "pm"
+			timeOfDay = "pm"
 
 		if word in units:
 			if hourFound == False:
