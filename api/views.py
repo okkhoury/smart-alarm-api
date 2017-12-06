@@ -113,7 +113,9 @@ def getResponse(request):
 				if word in onWords:
 					response['command'] = "on"
 
-					time = getTimeFromWords(data.split(" "))
+					wordlist = list("Word to Split")
+
+					time = getTimeFromWords(wordlist[0].split(" "))
 					response['time'] = time 
 
 					# Update the visual to indicate that an alarm is on
@@ -170,9 +172,14 @@ def showHomePage(request):
 	return render(request, 'home.html', {'AlarmTimeVisual': AlarmTimeVisual, 
 		'AlarmOnOffVisual': AlarmOnOffVisual, 'SnoozeVisual': SnoozeVisual, 'commandHistory': commandHistory})
 
+# five oh five
 
+# set an alarm for five oh five pm
 
 def getTimeFromWords(data):
+
+	print data
+
 	time = 0;
 	mag = 1;
 
