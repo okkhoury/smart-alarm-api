@@ -178,8 +178,6 @@ def showHomePage(request):
 
 def getTimeFromWords(data):
 
-	print data
-
 	time = 0;
 	mag = 1;
 
