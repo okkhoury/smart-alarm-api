@@ -135,15 +135,12 @@ def getResponse(request):
 					response['command'] = "off"
 
 					# Update the visual to indicate that an alarm is on
-					#global AlarmOnOffVisual
 					AlarmOnOffVisual = "NO ALARM SET"
 
 					# update visual with new alarm time
-					#global AlarmTimeVisual
 					AlarmTimeVisual = None
 
 					# Turn snooze off if it was on
-					#global SnoozeVisual
 					SnoozeVisual = "OFF"
 
 					commandHistory.append(data);
@@ -153,7 +150,6 @@ def getResponse(request):
 					response['command'] = "snooze"
 
 					# Turn snooze off if it was on
-					#global SnoozeVisual
 					SnoozeVisual = "ON"
 					
 					commandHistory.append(data);
@@ -173,6 +169,7 @@ def getResponse(request):
 def showHomePage(request):	
 	return render(request, 'home.html', {'AlarmTimeVisual': AlarmTimeVisual, 
 		'AlarmOnOffVisual': AlarmOnOffVisual, 'SnoozeVisual': SnoozeVisual, 'commandHistory': commandHistory})
+
 
 
 def getTimeFromWords(data):
@@ -195,6 +192,9 @@ def getTimeFromWords(data):
 				hourFound = True 
 			else:
 				minutes += units.index(word)
+
+		if word in tens:
+			minutes += tens.index(word) * 10
 
 	if minutes < 10:
 		minutes = "0" + str(minutes);
