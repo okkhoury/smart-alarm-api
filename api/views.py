@@ -105,7 +105,7 @@ def getResponse(request):
 			data = re.sub(r'([^\s\w]|_)+', '', fileData.split("transcript")[1].split("timestamps")[0]).strip().lower()
 
 			# Only keep track of the last 10 commands given.
-			if len(commandHistory) > 6:
+			if len(commandHistory) > 4:
 				commandHistory.pop(0)
 
 			for word in data.split("confidence")[0].split(" "):
