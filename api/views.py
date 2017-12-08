@@ -185,7 +185,7 @@ def getTimeFromWords(data):
 
 	hour = ""
 	minutes = 0
-	timeOfDay = "am"
+	timeOfDay = "pm"
 
 	hourFound = False
 
