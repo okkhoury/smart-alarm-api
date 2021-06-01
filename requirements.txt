@@ -24,6 +24,6 @@ rsa==3.4.2
 six==1.11.0
 SpeechRecognition==3.7.1
 tenacity==4.4.0
-urllib3==1.22
+urllib3==1.26.5
 watson-developer-cloud==0.26.1
 whitenoise==3.3.1
